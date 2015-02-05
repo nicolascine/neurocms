@@ -2,6 +2,8 @@
  * Base structure
  */
 
+*, *:before, *:after {box-sizing:  border-box !important;}
+
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
@@ -84,73 +86,6 @@ body {
   margin-top: 0;
 }
 
-.row.entradas {
-  border: 1px solid #eceff0;
-  padding-top: 30px;
-  background: white;
-}
-/*
- * entradaunica dashboard ideas
- */
-@media (min-width: 768px) {
-
-  .entradas {
-    margin-bottom: 30px;
-    text-align: center;
-
-    h2{
-
-      margin-bottom: 0px;
-      margin-top:0px;
-      font-size:1.7em;
-      font-weight: 300;
-
-      a:hover{
-        text-decoration: none;
-      }
-    
-    }
-  }
-}
-
-.entradaunica {
-  margin-bottom: 20px;
-  .info {
-    text-align:left;
-    min-height: 60px;
-    display: inline;
-    h5{
-      a, span{
-        display: inline;
-        text-decoration: none;
-        color:#685ab1;
-      }
-      a:hover{
-        text-decoration: underline;
-      }
-    }
-  }
-  img {
-    display: block;
-  }
-  a{
-    display: block;
-  }
-  
-}
-@media (min-width: 768px) {
-
-  .col-xs-12.col-sm-6.entradaunica:nth-child(odd) {
-      padding-right:7px !important;
-      overflow: hidden;
-    }
-  .col-xs-12.col-sm-6.entradaunica:nth-child(even) {
-      padding-left:7px !important;
-      overflow: hidden;
-  }
-}
-
-
 .post{
   h1{
     color:black;
@@ -185,7 +120,19 @@ body {
     margin-left:0px !important;
   }
 }
-
+.masonry{
+   -moz-column-width: 25em;
+   -webkit-column-width: 25em;
+   -moz-column-gap: .5em;
+   -webkit-column-gap: .5em; 
+  
+}
+.panel {
+  display: inline-block;
+  max-width: 100%;
+  border:none;
+  box-shadow:none;
+}
 
 /*colores*/
 

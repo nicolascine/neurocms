@@ -32,10 +32,6 @@
 </div>
 -->
 
-
-     
-
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -101,12 +97,10 @@
    {{# each data.posts.results}}
 
                   <div class="panel panel-default">
-                      <div class="panel-heading"><a href="{{postUrl slug}}">{{{title}}}</a></div>
                       <div class="panel-body">
-                      <h5>{{{categoryList categories prefix="En la categoría "}}}{{#if author.name.first}} por <span class="destaca">{{author.name.first}}{{/if}}</span></h5>
-
-                         <a href="{{postUrl slug}}"><img src="{{cloudinaryUrl image width=400 height=200}}" class="img-responsive" alt="{{{title}}}"></a>
-                          {{{content.brief}}}
+                        <a href="{{postUrl slug}}"><img src="{{cloudinaryUrl image width=400 height=200}}" class="img-responsive" alt="{{{title}}}"></a>
+                        <h2><a href="{{postUrl slug}}">{{{title}}}</a></h2>
+                        <h3>{{{categoryList categories prefix="En la categoría "}}}{{#if author.name.first}} por <span class="destaca">{{author.name.first}}{{/if}}</span></h3>
                         </div>
                   </div>
   {{/each}}
