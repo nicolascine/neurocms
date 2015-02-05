@@ -16,12 +16,12 @@ var LessPluginAutoPrefix = require('less-plugin-autoprefix'),
 
 
 // Create variables for our project paths so we can change in one place
-treamevent-streamtask('watch:lint', function () {
+/*treamevent-streamtask('watch:lint', function () {
 	gulp.src(paths.src)
 		.pipe(watch())
 		.pipe(jshint())
 		.pipe(jshint.reporter(jshintReporter));
-});
+});*/
 
 // LESS
 gulp.task('build-less',function () {
@@ -34,7 +34,7 @@ gulp.task('build-less',function () {
 
 
 // concatenar archivos JS
-gulp.task('concatena-js',function () {
+gulp.task('build-js',function () {
   gulp.src(['./public/js/misjs/jquery.particleground.min.js'
   			,'./public/js/misjs/neurocms.js'])
   .pipe(concat('todo.min.js'))
@@ -46,7 +46,7 @@ gulp.task('concatena-js',function () {
 // watch ~
 gulp.task('watch', function(){
 
-	gulp.watch('./public/js/misjs/*.js', ['concatena-js']);
+	gulp.watch('./public/js/misjs/*.js', ['build-js']);
 	gulp.watch('./public/styles/*/*.less', ['build-less']);
 
 });
