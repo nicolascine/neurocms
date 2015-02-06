@@ -1,11 +1,18 @@
-gulp = require('gulp'),
-jshint = require('gulp-jshint'),
-jshintReporter = require('jshint-stylish'),
-concat = require('gulp-concat'),
-uglify = require('gulp-uglify'),
-less = require('gulp-less'),
-watch = require('gulp-watch'),
-del = require('del');
+var gulp            = require('gulp'),
+    jshint          = require('gulp-jshint'),
+    jshintReporter  = require('jshint-stylish'),
+    concat          = require('gulp-concat'),
+    uglify          = require('gulp-uglify'),
+    less            = require('gulp-less'),
+    watch           = require('gulp-watch'),
+    del             = require('del'),
+    plumber         = require('gulp-plumber'),
+    gutil           = require('gulp-util'),
+    expect          = require('gulp-expect-file'),
+    uncss           = require('gulp-uncss'),
+    csso            = require('gulp-csso');
+
+
 
 // clean + autoprefix
 var LessPluginCleanCSS = require("less-plugin-clean-css"),
@@ -19,21 +26,50 @@ var LessPluginAutoPrefix = require('less-plugin-autoprefix'),
     });
 
 //paths vars
-var pathLESS = './devAssets/less/site.less',
-    destCSS = './public/styles/',
-    filesJS = ['./devAssets/js/jquery.particleground.min.js',
-               './devAssets/js/neurocms.js'
-    ],
-    destJS = './public/js/';
+var pathLESS            = 'devAssets/less/site.less',
+    destCSS             = 'public/styles/',
+    filesJS             = [
+                            'devAssets/js/jquery.particleground.min.js',
+                            'devAssets/js/neurocms.js'
+                          ],
+    destJS              = 'public/js/';
+    compiledTemplates   = ['http://127.0.0.1:3000/blog', 'http://127.0.0.1:3000/blog/post/opengl']
+    bootstrapIgnore     = [
+                            ".fade",
+                            ".fade.in",
+                            ".navbar-collapse",
+                            ".navbar-nav",
+                            ".navbar-header",
+                            ".navbar-left",
+                            ".navbar-right",
+                            ".navbar-nav.navbar-left:first-child",
+                            ".navbar-nav.navbar-right:last-child",
+                            ".navbar-text:last-child",
+                            ".navbar-collapse.in",
+                            ".in",
+                            ".collapse",
+                            ".collapse.in",
+                            ".collapsing",
+                            ".alert-danger",
+                            /\.open/
+                           ]
 
-// BUILD - LESS
-gulp.task('build-less', function() {
-    gulp.src(pathLESS)
-        .pipe(less({
-            plugins: [autoprefix, cleancss]
-        }))
-        .pipe(gulp.dest(destCSS));
-});
+    // BUILD - LESS
+    gulp.task('build-less', function() {
+        gulp.src(pathLESS)
+            .pipe(plumber())
+            .pipe(expect(pathLESS))
+            .pipe(less({
+                plugins: [autoprefix, cleancss]
+            }))
+            .pipe(uncss({
+               html: compiledTemplates,
+               ignore: bootstrapIgnore
+             }))
+            .pipe(csso())
+            .pipe(gulp.dest(destCSS))
+            .on('error', gutil.log);
+    });
 
 // BUILD - JS
 gulp.task('build-js', function() {
@@ -47,7 +83,10 @@ gulp.task('build-js', function() {
 // watch ~ DEFAULT
 gulp.task('default', function() {
 
-    gulp.watch('./devAssets/js/*.js', ['build-js']);
-    gulp.watch('./devAssets/less/*/*.less', ['build-less']);
+    var watchJs    = ['devAssets/js/*.js'],
+        watchLess  = ['devAssets/less/*/*.less'];
+
+    gulp.watch(watchJs, ['build-js']);
+    gulp.watch(watchLess, ['build-less']);
 
 });
