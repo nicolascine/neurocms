@@ -14,48 +14,35 @@ var LessPluginCleanCSS = require("less-plugin-clean-css"),
 var LessPluginAutoPrefix = require('less-plugin-autoprefix'),
     autoprefix = new LessPluginAutoPrefix({browsers: ["last 2 versions"]});
 
+var pathLESS 	= './devAssets/less/site.less',
+	destCSS  	= './public/styles/',
+	filesJS	 	= ['./devAssets/js/jquery.particleground.min.js',
+				   './devAssets/js/neurocms.js'
+				  ],
+	destJS 		= './public/js/';
 
-// Create variables for our project paths so we can change in one place
-/*treamevent-streamtask('watch:lint', function () {
-	gulp.src(paths.src)
-		.pipe(watch())
-		.pipe(jshint())
-		.pipe(jshint.reporter(jshintReporter));
-});*/
-
-// LESS
+// BUILD - LESS
 gulp.task('build-less',function () {
-  gulp.src('./public/styles/site.less')
+  gulp.src(pathLESS)
 	.pipe(less({
-	    plugins: [autoprefix, cleancss]
-	  }))
-    .pipe(gulp.dest('./public/styles/'));
+		plugins: [autoprefix, cleancss]
+	}))
+    .pipe(gulp.dest(destCSS));
 });
 
-
-// concatenar archivos JS
+// BUILD - JS
 gulp.task('build-js',function () {
-  gulp.src(['./public/js/misjs/jquery.particleground.min.js'
-  			,'./public/js/misjs/neurocms.js'])
+  gulp.src(filesJS)
   .pipe(concat('todo.min.js'))
   .pipe(uglify())
   .pipe(jshint())
-  .pipe(gulp.dest('./public/js/'));
+  .pipe(gulp.dest(destJS));
 });
 
-// watch ~
-gulp.task('watch', function(){
+// watch ~ DEFAULT
+gulp.task('default', function(){
 
-	gulp.watch('./public/js/misjs/*.js', ['build-js']);
-	gulp.watch('./public/styles/*/*.less', ['build-less']);
+	gulp.watch('./devAssets/js/*.js', ['build-js']);
+	gulp.watch('./devAssets/less/*/*.less', ['build-less']);
 
 });
-
-
-/*
- * C  L  E  A  N 
-gulp.task('clean', function(cb) {
-    del(['./public/js/build/neurocms.min.js'], cb);
-    del(['./public/styles/build/site.css'], cb);
-});
- */
