@@ -18,6 +18,7 @@ var LessPluginAutoPrefix = require('less-plugin-autoprefix'),
         browsers: ["last 2 versions"]
     });
 
+//paths vars
 var pathLESS = './devAssets/less/site.less',
     destCSS = './public/styles/',
     filesJS = ['./devAssets/js/jquery.particleground.min.js',
