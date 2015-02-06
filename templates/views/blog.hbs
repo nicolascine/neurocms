@@ -1,117 +1,24 @@
-<!--- <div class="container">
-	<h1>Blog</h1>
-</div>
-<div class="container">
-	<div class="row">
-		<div class="col-sm-8 col-md-9">
-			<h4 class="text-weight-normal">Hay {{ data.posts.results.length}} posts.</h4>
-			<div class="blog">
-				{{# each data.posts.results}}
-				<div data-ks-editable="{{#if ../user}}{{adminEditableUrl ../../user _id}}{{/if}}" class="post">
-					<h2><a href="{{postUrl slug}}">{{{title}}}</a></h2>
-					<p class="lead text-muted">{{{categoryList categories prefix="En la categoría "}}}
-							{{#if author.name.first}}por {{author.name.first}}{{/if}}
-					</p>
-					<p>{{{content.extended}}}</p>
-					<p class="read-more"><a href="{{postUrl slug}}">Leer más...</a></p>
-				</div>
-				{{/each}}
-			</div>
-		</div>
-		<div class="col-sm-4 col-md-3">
-			<h2>Categories</h2>
-			<div style="margin-top: 70px;" class="list-group">
-				<a href="/blog" class="active list-group-item">Categorías</a>
-				{{# each data.categories }}
-				<a href="{{categoryUrl key}}" class="false list-group-item">{{name}}</a>
-				{{/each}}
-			</div>
-		</div>
-	</div>
-	{{>pagination}}
-</div>
--->
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">neurobits</a>
+<div class="container-fluid">
+  <!-- ROW -->
+  <div class="row">
+    {{>sidebar}}
+    <!-- COL POSTS -->
+    <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+      {{ data.posts.results.categories}}
+      <div class="row masonry" style="background:white;padding:15px;">
+        {{# each data.posts.results}}
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <a href="{{postUrl slug}}"><img src="{{cloudinaryUrl image width=400 height=200}}" class="img-responsive" alt="{{{title}}}"></a>
+            <h2><a href="{{postUrl slug}}">{{{title}}}</a></h2>
+            <h3>{{{categoryList categories prefix="En la categoría "}}}{{#if author.name.first}} por <span class="destaca">{{author.name.first}}{{/if}}</span></h3>
+          </div>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
-        </div>
+        {{/each}}
       </div>
-    </nav>
-
-    <div class="container-fluid">
-      <!-- ROW -->
-      <div class="row">
-        <div class="col-sm-3 col-md-3 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Desarrollo Web <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Desarrollo Movil</a></li>
-            <li><a href="#">Diseño</a></li>
-            <li><a href="#">UI / UX</a></li>
-            <li><a href="#">Servidores</a></li>
-            <li><a href="#">Seguridad Informática</a></li>
-            <li><a href="#">Hacking Ético</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Cine DSLR</a></li>
-            <li><a href="">Postproducción Imagen</a></li>
-            <li><a href="">Postproducción Sonido</a></li>
-            <li><a href="">Motion Graphic</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Fotografía</a></li>
-            <li><a href="">Software Foto</a></li>
-            <li><a href="">Teoría Foto</a></li>
-            <li><a href="">Teoría Foto</a></li>
-            <li><a href="">Teoría Foto</a></li>
-            <li><a href="">Teoría Foto</a></li>
-            <li><a href="">Teoría Foto</a></li>
-            <li><a href="">Teoría Foto</a></li>
-          </ul>
-        </div>
-        <!-- COL POSTS -->
-     <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-                  {{ data.posts.results.categories}} 
-
-              <div class="row masonry" style="background:white;padding:15px;">
-
-   {{# each data.posts.results}}
-
-                  <div class="panel panel-default">
-                      <div class="panel-body">
-                        <a href="{{postUrl slug}}"><img src="{{cloudinaryUrl image width=400 height=200}}" class="img-responsive" alt="{{{title}}}"></a>
-                        <h2><a href="{{postUrl slug}}">{{{title}}}</a></h2>
-                        <h3>{{{categoryList categories prefix="En la categoría "}}}{{#if author.name.first}} por <span class="destaca">{{author.name.first}}{{/if}}</span></h3>
-                        </div>
-                  </div>
-  {{/each}}
-
-              </div>
-
-
-
-
-        </div>
-        <!-- //COL POSTS -->
-
-    </div> 
-    <!-- //ROW -->
+      {{>pagination}}
+    </div>
+    <!-- //COL POSTS -->
+  </div>
+  <!-- //ROW -->
+</div>
