@@ -1,24 +1,37 @@
-<div class="container-fluid">
-  <!-- ROW -->
-  <div class="row">
-    {{>sidebar}}
-    <!-- COL POSTS -->
-    <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-      {{ data.posts.results.categories}}
-      <div class="row masonry" style="background:white;padding:15px;">
-        {{# each data.posts.results}}
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <a href="{{postUrl slug}}"><img src="{{cloudinaryUrl image width=400 height=200}}" class="img-responsive" alt="{{{title}}}"></a>
-            <h2><a href="{{postUrl slug}}">{{{title}}}</a></h2>
-            <h3>{{{categoryList categories prefix="En la categoría "}}}{{#if author.name.first}}<span class="destaca"> por {{author.name.first}}</span>{{/if}}</h3>
-          </div>
-        </div>
-        {{/each}}
+
+<!-- COL POSTS -->
+<div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+
+  {{ data.posts.results.categories}}
+  
+  <div class="row masonry" style="background:white;padding:15px;">
+  
+    {{# each data.posts.results}}
+  
+  <!-- single post -->
+    <div class="panel panel-default postsloop">
+
+      <div class="panel-body">
+
+        <a href="{{postUrl slug}}">
+          <img src="{{cloudinaryUrl image width=400 height=200}}" class="img-responsive" alt="{{{title}}}"></a>
+
+        <h2><a href="{{postUrl slug}}">{{{title}}}</a></h2>
+
+        <h3>{{{categoryList categories prefix="En la categoría "}}}{{#if author.name.first}}
+          <span class="destaca"> por {{author.name.first}}</span>{{/if}}</h3>
+
       </div>
-      {{>pagination}}
+
     </div>
-    <!-- //COL POSTS -->
+  <!-- //single post -->
+
+
+    {{/each}}
+
   </div>
-  <!-- //ROW -->
+
+  {{>pagination}}
+
 </div>
+<!-- //COL POSTS -->

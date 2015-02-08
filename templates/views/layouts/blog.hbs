@@ -22,7 +22,22 @@
 </head>
 <body>
 {{>navbar}}
-{{{body}}}
+
+<div class="container-fluid">
+  <!-- ROW -->
+  <div class="row">
+    {{>sidebar}}
+    <!-- COL POSTS -->
+
+	 {{{body}}}
+
+
+    <!-- //COL POSTS -->
+  </div>
+  <!-- //ROW -->
+</div>
+
+
 <script src="/js/todo.min.js"></script>
 </body>
 </html>
