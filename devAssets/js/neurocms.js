@@ -4,8 +4,8 @@
 
 $(document).ready(function() {
   $('#particles').particleground({
-    dotColor: '#33AECD',
-    lineColor: '#33AECD',
+    dotColor: '#00D8FF',
+    lineColor: '#00D8FF',
     particleRadius: 6
   });
   $('.intro').css({
