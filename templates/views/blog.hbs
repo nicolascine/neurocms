@@ -11,7 +11,7 @@
           <div class="panel-body">
             <a href="{{postUrl slug}}"><img src="{{cloudinaryUrl image width=400 height=200}}" class="img-responsive" alt="{{{title}}}"></a>
             <h2><a href="{{postUrl slug}}">{{{title}}}</a></h2>
-            <h3>{{{categoryList categories prefix="En la categoría "}}}{{#if author.name.first}} por <span class="destaca">{{author.name.first}}{{/if}}</span></h3>
+            <h3>{{{categoryList categories prefix="En la categoría "}}}{{#if author.name.first}}<span class="destaca"> por {{author.name.first}}</span>{{/if}}</h3>
           </div>
         </div>
         {{/each}}
