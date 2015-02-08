@@ -28,9 +28,5 @@ WebFontConfig = {
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(wf, s);
   })();
-
-
-
-
-
+  
 });

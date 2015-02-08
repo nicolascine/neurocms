@@ -12,8 +12,6 @@ var gulp            = require('gulp'),
     uncss           = require('gulp-uncss'),
     csso            = require('gulp-csso');
 
-
-
 // clean + autoprefix
 var LessPluginCleanCSS = require("less-plugin-clean-css"),
     cleancss = new LessPluginCleanCSS({
@@ -29,7 +27,9 @@ var LessPluginAutoPrefix = require('less-plugin-autoprefix'),
 var pathLESS            = 'devAssets/less/site.less',
     destCSS             = 'public/styles/',
     filesJS             = [
-                            'devAssets/js/jquery.particleground.min.js',
+                            'devAssets/js/vendor/jquery/jquery.1.11.2.min.js',
+                            'devAssets/js/vendor/bootstrap/bootstrap.min.js',
+                            'devAssets/js/vendor/particlegroud/jquery.particleground.min.js',
                             'devAssets/js/neurocms.js'
                           ],
     destJS              = 'public/js/';
@@ -54,36 +54,39 @@ var pathLESS            = 'devAssets/less/site.less',
                             /\.open/
                            ]
 
-    // BUILD - LESS
-    gulp.task('build-less', function() {
-        gulp.src(pathLESS)
-            .pipe(plumber())
-            .pipe(expect(pathLESS))
-            .pipe(less({
-                plugins: [autoprefix, cleancss]
-            }))
-            .pipe(uncss({
-               html: compiledTemplates,
-               ignore: bootstrapIgnore
-             }))
-            .pipe(csso())
-            .pipe(gulp.dest(destCSS))
-            .on('error', gutil.log);
-    });
+// BUILD - LESS
+gulp.task('build-less', function() {
+    gulp.src(pathLESS)
+        .pipe(plumber())
+        .pipe(expect(pathLESS))
+        .pipe(less({
+            plugins: [autoprefix, cleancss]
+        }))
+        .pipe(uncss({
+           html: compiledTemplates,
+           ignore: bootstrapIgnore
+         }))
+        .pipe(csso())
+        .pipe(gulp.dest(destCSS))
+        .on('error', gutil.log);
+});
 
 // BUILD - JS
 gulp.task('build-js', function() {
     gulp.src(filesJS)
+        .pipe(plumber())
+        .pipe(expect(filesJS))
         .pipe(concat('todo.min.js'))
         .pipe(uglify())
         .pipe(jshint())
-        .pipe(gulp.dest(destJS));
+        .pipe(gulp.dest(destJS))
+        .on('error', gutil.log);
 });
 
 // watch ~ DEFAULT
 gulp.task('default', function() {
 
-    var watchJs    = ['devAssets/js/*.js'],
+    var watchJs    = ['devAssets/js/*/*.js'],
         watchLess  = ['devAssets/less/*/*.less'];
 
     gulp.watch(watchJs, ['build-js']);
