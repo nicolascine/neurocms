@@ -14,6 +14,7 @@ var scriptTemplate = _.template('<script src="<%= src %>"></script>');
 var cssLinkTemplate = _.template('<link href="<%= href %>" rel="stylesheet">');
 var cloudinaryUrlLimit = _.template(CLOUDINARY_HOST + '/<%= cloudinaryUser %>/image/upload/c_limit,f_auto,h_<%= height %>,w_<%= width %>/<%= publicId %>.jpg');
 
+moment.locale('es');
 
 module.exports = function() {
 	
@@ -67,8 +68,17 @@ module.exports = function() {
 		
 		// ensure that context is undefined, not null, as that can cause errors
 		context = context === null ? undefined : context;
-		
-		var f = options.hash.format || 'MMM Do, YYYY',
+
+
+		var ahora = moment();
+
+		if( moment(context).format('YYYY') < ahora.format('YYYY') ){
+			formato = "D MMM 'YY";
+		} else {
+			formato = "D MMM";
+		}
+
+		var f = options.hash.format || formato,
 			timeago = options.hash.timeago,
 			date;
 		
