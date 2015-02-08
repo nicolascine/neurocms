@@ -10,7 +10,8 @@ var gulp            = require('gulp'),
     gutil           = require('gulp-util'),
     expect          = require('gulp-expect-file'),
     uncss           = require('gulp-uncss'),
-    csso            = require('gulp-csso');
+    csso            = require('gulp-csso'),
+    livereload      = require('gulp-livereload');
 
 // clean + autoprefix
 var LessPluginCleanCSS = require("less-plugin-clean-css"),
@@ -62,12 +63,13 @@ gulp.task('build-less', function() {
         .pipe(less({
             plugins: [autoprefix, cleancss]
         }))
-        .pipe(uncss({
+        /*.pipe(uncss({
            html: compiledTemplates,
            ignore: bootstrapIgnore
-         }))
+         }))*/
         .pipe(csso())
         .pipe(gulp.dest(destCSS))
+        .pipe(livereload())
         .on('error', gutil.log);
 });
 
@@ -80,11 +82,14 @@ gulp.task('build-js', function() {
         .pipe(uglify())
         .pipe(jshint())
         .pipe(gulp.dest(destJS))
+        .pipe(livereload())
         .on('error', gutil.log);
 });
 
 // watch ~ DEFAULT
 gulp.task('default', function() {
+    
+    livereload.listen();
 
     var watchJs    = ['devAssets/js/*/*.js'],
         watchLess  = ['devAssets/less/*/*.less'];
@@ -92,4 +97,18 @@ gulp.task('default', function() {
     gulp.watch(watchJs, ['build-js']);
     gulp.watch(watchLess, ['build-less']);
 
+});
+
+// watch ~ Only watch less files
+gulp.task('watch-less', function() {
+    livereload.listen();
+    watchLess  = ['devAssets/less/*/*.less'];
+    gulp.watch(watchLess, ['build-less']);
+});
+
+// watch ~ Only watch js files
+gulp.task('watch-js', function() {
+    livereload.listen();
+    watchJs  = ['devAssets/js/*/*.js'];
+    gulp.watch(watchJs, ['build-js']);
 });
