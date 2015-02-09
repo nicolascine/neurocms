@@ -17,7 +17,7 @@ $(document).ready(function() {
  */
 
 WebFontConfig = {
-    google: { families: [ 'Source+Sans+Pro:300,400,600:latin' ] }
+    google: { families: [ 'Source+Sans+Pro:300,400,600:latin', 'Bitter:400,400italic:latin' ] }
   };
   (function() {
     var wf = document.createElement('script');

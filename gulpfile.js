@@ -63,10 +63,10 @@ gulp.task('build-less', function() {
         .pipe(less({
             plugins: [autoprefix, cleancss]
         }))
-        /*.pipe(uncss({
+        .pipe(uncss({
            html: compiledTemplates,
            ignore: bootstrapIgnore
-         }))*/
+         }))
         .pipe(csso())
         .pipe(gulp.dest(destCSS))
         .pipe(livereload())

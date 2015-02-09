@@ -1,37 +1,60 @@
-
 <!-- COL POSTS -->
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
 
-  {{ data.posts.results.categories}}
-  
-  <div class="row masonry" style="background:white;padding:15px;">
-  
-    {{# each data.posts.results}}
-  
-  <!-- single post -->
-    <div class="panel panel-default postsloop">
+  <div class="row destacados">
 
-      <div class="panel-body">
+   {{# each data.primerPost}}
+        <div class="col-md-8">
+          <a href="{{postUrl slug}}" title="{{{title}}}">
+          <img class="img-responsive" src="{{cloudinaryUrl image width=600 height=300}}" alt="{{{title}}}">
+          </a>
+          <h3>
+          <time datetime="{{date publishedDate format='DD-MM-YYYY'}}">{{date publishedDate}}</time>{{{categoryList categories prefix=" En la categoría "}}}
+            {{#if author.name.first}} por <span class="destaca">{{author.name.first}}</span>{{/if}}
+          </h3>
+          <h2><a href="{{postUrl slug}}" title="{{{title}}}">{{title}}</a></h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, tempore distinctio possimus officiis similique expedita at laborum! Dolorem, in, quia, ab quidem veniam amet optio impedit sed odio possimus commodi , in, quia, ab quidem veniam amet optio impedit sed </p>
+        </div>
+   {{/each}}
 
-        <a href="{{postUrl slug}}">
-          <img src="{{cloudinaryUrl image width=400 height=200}}" class="img-responsive" alt="{{{title}}}"></a>
+    <div class="col-md-4">
 
-        <h2><a href="{{postUrl slug}}">{{{title}}}</a></h2>
-
-        <h3>{{{categoryList categories prefix="En la categoría "}}}{{#if author.name.first}}
-          <span class="destaca"> por {{author.name.first}}</span>{{/if}}</h3>
-
+   {{# each data.dostresPost}}
+      <div class="minipost">
+        <a href="{{postUrl slug}}" title="{{{title}}}">
+        <img src="{{cloudinaryUrl image width=250 height=150}}" class="img-responsive" alt="{{{title}}}"></a>
+        <h3>
+        <time datetime="{{date publishedDate format='DD-MM-YYYY'}}">{{date publishedDate}}</time>
+        {{{categoryList categories prefix=" En la categoría "}}}
+        {{#if author.name.first}} por <span class="destaca">{{author.name.first}}</span>{{/if}}
+        </h3>
+        <h2><a href="{{postUrl slug}}" title="{{{title}}}">{{{title}}}</a></h2>
       </div>
+   {{/each}}
 
     </div>
-  <!-- //single post -->
-
-
-    {{/each}}
 
   </div>
-
+  <div class="row masonry">
+    {{# each data.posts}}
+    <!-- single post -->
+    <div class="panel panel-default postsloop">
+      <div class="panel-body">
+        <a href="{{postUrl slug}}">
+        <img src="{{cloudinaryUrl image width=357 height=177}}" class="img-responsive" alt="{{{title}}}"></a>
+        <h3>
+        <time datetime="{{date publishedDate format='DD-MM-YYYY'}}">{{date publishedDate}}</time>
+        {{{categoryList categories prefix=" En la categoría "}}}
+        {{#if author.name.first}}
+        por <span class="destaca">{{author.name.first}}</span>
+        {{/if}}
+        </h3>
+        <h2><a href="{{postUrl slug}}">{{{title}}}</a></h2>
+      </div>
+    </div>
+    <!-- //single post -->
+    {{/each}}
+  </div>
   {{>pagination}}
-
 </div>
 <!-- //COL POSTS -->

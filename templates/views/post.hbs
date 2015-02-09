@@ -1,22 +1,23 @@
- 
-
-    <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main single">
-      <div class="row entradas">
-        <article>
-        <p><a href="/blog">&larr; volver al blog</a>  {{{categoryList data.post.categories prefix="&#124; "}}} &#124; {{data.post.title}} </p>
-        <hr>
-        <header>
-          <h1>{{data.post.title}}</h1>
-          <img src="{{cloudinaryUrl data.post.image width=830 height=430}}" alt="{{data.post.title}}" class="img-responsive" />
-          <h2>{{{categoryList data.post.categories prefix="En la categoría "}}} {{#if author.name.first}}por {{author.name.first}}{{/if}}</h2>
-        </header>
-        
-        <div class="textpost">
-          {{{data.post.content.extended}}}
-        </div>
-        
-        </article>
-        
+<div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main single">
+  <div class="row entradas">
+    <article id="post">
+      <div id="breadcrumb">
+        <a href="/blog">&larr; volver al blog</a>  {{{categoryList data.post.categories prefix="&#124; "}}} &#124; {{data.post.title}} 
       </div>
-    </div>
- 
+
+      <header>
+        <h1>{{data.post.title}}</h1>
+        
+          <img src="{{cloudinaryUrl data.post.image width=830 height=430}}" alt="{{data.post.title}}" class="img-responsive" />
+
+        <h2>{{{categoryList data.post.categories prefix="En la categoría "}}} {{#if data.post.author.name.first}}por {{data.post.author.name.first}} {{/if}}</h2>
+      </header>
+      
+      <div class="textpost">
+        {{{data.post.content.extended}}}
+      </div>
+      
+    </article>
+    
+  </div>
+</div>
