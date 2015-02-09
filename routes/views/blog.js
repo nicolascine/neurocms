@@ -12,10 +12,11 @@ exports = module.exports = function(req, res) {
 		category: req.params.category
 	};
 	locals.data = {
+		primerPost: [],
+		dostresPost: [],
 		posts: [],
 		categories: []
 	};
-	
 	// Load all categories
 	view.on('init', function(next) {
 		
@@ -59,7 +60,25 @@ exports = module.exports = function(req, res) {
 	
 	// Load the posts
 	view.on('init', function(next) {
-		
+
+		Post = keystone.list('Post');
+		var k = Post.model.find()
+				.where('state', 'published')
+				.sort('-publishedDate')
+				.populate('author categories')
+				.limit(1);
+
+		var z =	keystone.list('Post')
+					.model
+					.find({}, {}, 
+						{ 
+							skip:1,
+							limit: 2,
+							where:{'state' : 'published'},
+							sort:'-publishedDate',
+							populate:'author categories'
+						});	
+/*
 		var q = keystone.list('Post').paginate({
 				page: req.query.page || 1,
 				perPage: 10,
@@ -68,17 +87,43 @@ exports = module.exports = function(req, res) {
 			.where('state', 'published')
 			.sort('-publishedDate')
 			.populate('author categories');
-		
+*/
+
+
+		var q =	keystone.list('Post')
+					.model
+					.find({}, {}, 
+						{ 
+							skip:3,
+							where:{'state' : 'published'},
+							sort:'-publishedDate',
+							populate:'author categories'
+						});	
+			
 		if (locals.data.category) {
+			k.where('categories').in([locals.data.category]);
+			z.where('categories').in([locals.data.category]);
 			q.where('categories').in([locals.data.category]);
 		}
-		
-		q.exec(function(err, results) {
-			locals.data.posts = results;
-			/* console.log(locals.data.posts); */
-			next(err);
+
+		//first posts
+		k.exec(function(err, results) {
+			locals.data.primerPost = results;
 		});
 		
+		// two min posts
+		z.exec(function(err, results) {
+			locals.data.dostresPost = results;
+
+		});	
+
+		//all posts
+		q.exec(function(err, results) {
+			locals.data.posts = results;
+			next(err);
+		});
+
+
 	});
 	
 	// Render the view
