@@ -1,0 +1,37 @@
+<!-- COL POSTS -->
+<div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+
+{{#if data.resultados}}
+ 
+ <h2>Los resultados para la busqueda son:</h2>
+
+ <div class="row masonry">
+  	
+    {{# each data.resultados}}
+    <!-- single post -->
+    <div class="panel panel-default postsloop">
+      <div class="panel-body">
+        <a href="{{postUrl slug}}">
+        <img src="{{cloudinaryUrl image width=357 height=177}}" class="img-responsive" alt="{{{title}}}"></a>
+        <h3>
+        <time datetime="{{date publishedDate format='DD-MM-YYYY'}}">{{date publishedDate}}</time>
+        {{{categoryList categories prefix=" En la categoría "}}}
+        {{#if author.name.first}}
+        por <span class="destaca">{{author.name.first}}</span>
+        {{/if}}
+        </h3>
+        <h2><a href="{{postUrl slug}}">{{{title}}}</a></h2>
+      </div>
+    </div>
+    <!-- //single post -->
+    {{/each}}
+
+    {{else}}
+    	<h3>=( no encontré nada relacionado </h3>
+  </div>
+
+{{/if}}
+
+
+</div>
+<!-- //COL POSTS -->
