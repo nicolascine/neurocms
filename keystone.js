@@ -14,13 +14,11 @@ keystone.init({
 
 	'name': 'NeuroCms',
 	'brand': 'neurobits',
-	
 	'less': 'public',
 	'static': 'public',
 	'favicon': 'public/favicon.ico',
 	'views': 'templates/views',
 	'view engine': 'hbs',
-	
 	'custom engine': handlebars.create({
 		layoutsDir: 'templates/views/layouts',
 		partialsDir: 'templates/views/partials',
@@ -28,11 +26,9 @@ keystone.init({
 		helpers: new require('./templates/views/helpers')(),
 		extname: '.hbs'
 	}).engine,
-	
 	'auto update': true,
 	'mongo': process.env.MONGO_URI || 'mongodb://localhost/',// + pkg.name,
 	'mandrill api key': process.env.MANDRILL_KEY,
-
 	'session': true,
 	'auth': true,
 	'user model': 'User',
