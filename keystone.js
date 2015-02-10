@@ -30,9 +30,9 @@ keystone.init({
 	}).engine,
 	
 	'auto update': true,
-	'mongo': process.env.MONGO_URI || 'mongodb://localhost/' + pkg.name,
+	'mongo': process.env.MONGO_URI || 'mongodb://localhost/',// + pkg.name,
 	'mandrill api key': process.env.MANDRILL_KEY,
-	
+
 	'session': true,
 	'auth': true,
 	'user model': 'User',
