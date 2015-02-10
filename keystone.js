@@ -30,10 +30,13 @@ keystone.init({
 	}).engine,
 	
 	'auto update': true,
+	'mongo': process.env.MONGO_URI || 'mongodb://localhost/' + pkg.name,
+	'mandrill api key': process.env.MANDRILL_KEY,
+	
 	'session': true,
 	'auth': true,
 	'user model': 'User',
-	'cookie secret': 'AxR|"V$P+GpgkR2;EfDG{.IBa{i*wA,#7V;m9>PTkR=!rV}ikTUB`"h<H/N1kq|A'
+	'cookie secret': process.env.COOKIE_SECRET || 'AxR|"V$P+GpgkR2;EfDG{.IBa{i*wA,#7V;m9>PTkR=!rV}ikTUB`"h<H/N1kq|A',
 
 });
 
