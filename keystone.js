@@ -58,6 +58,11 @@ keystone.set('routes', require('./routes'));
 // Setup common locals for your emails. The following are required by Keystone's
 // default email templates, you may remove them if you're using your own.
 
+// Cloudinary Config
+
+keystone.set('cloudinary config', process.env.CLOUDINARY_URL );
+
+
 // Configure the navigation bar in Keystone's Admin UI
 
 keystone.set('nav', {
