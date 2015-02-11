@@ -11,7 +11,7 @@ var keystone = require('keystone'),
 // and documentation.
 
 keystone.init({
-
+	'env':	process.env.NODE_ENV || "development",
 	'name': 'NeuroCms',
 	'brand': 'neurobits',
 	'less': 'public',
@@ -27,18 +27,21 @@ keystone.init({
 		extname: '.hbs'
 	}).engine,
 	'auto update': true,
-	'mongo': process.env.MONGO_URI || 'mongodb://localhost/',// + pkg.name,
-	'mandrill api key': process.env.MANDRILL_KEY,
-	'cloudinary config': process.env.CLOUDINARY_URL,
 	'session': true,
 	'auth': true,
 	'user model': 'User',
-	'cookie secret': process.env.COOKIE_SECRET || 'AxR|"V$P+GpgkR2;EfDG{.IBa{i*wA,#7V;m9>PTkR=!rV}ikTUB`"h<H/N1kq|A',
+	
+	//config vars
+	'mongo': process.env.MONGO_URI || 'mongodb://localhost/',
+	'mandrill api key': process.env.MANDRILL_KEY,
+	'cloudinary config': process.env.CLOUDINARY_URL,
+	'cloudinary prefix': 'neurobits',
+	'cloudinary folders': true,
+	'cookie secret': process.env.COOKIE_SECRET || 'AxR|"V$P+GpgkR2;EfDG{.IBa{i*wA,#7V;m9>PTkR=!rV}ikTUB`"h<H/N1kq|A'
 
 });
 
 // Load your project's Models
-
 keystone.import('models');
 
 // Setup common locals for your templates. The following are required for the
