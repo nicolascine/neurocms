@@ -4,7 +4,9 @@ require('dotenv').load();
 
 // Require keystone
 var keystone = require('keystone'),
-	handlebars = require('express-handlebars');
+	handlebars = require('express-handlebars'),
+	keystoneRest = require('keystone-rest');
+
 
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options
@@ -50,7 +52,7 @@ keystone.import('models');
 
 keystone.set('locals', {
 	_: require('underscore'),
-	env: keystone.get('env'),
+	env: keystone ('env'),
 	utils: keystone.utils,
 	editable: keystone.content.editable
 });
@@ -75,3 +77,9 @@ keystone.set('nav', {
 // Start Keystone to connect to your database and initialise the web server
 
 keystone.start();
+
+// inicializa rutas REST - previene error
+keystoneRest.registerRoutes(keystone.app);
+
+
+
