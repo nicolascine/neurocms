@@ -34,12 +34,17 @@ keystone.init({
 	'user model': 'User',
 	
 	//config vars
-	'mongo': process.env.MONGO_URI || 'mongodb://localhost/',
+	'mongo': process.env.MONGO_URI || 'mongodb://localhost/neurocms',
 	'mandrill api key': process.env.MANDRILL_KEY,
 	'cloudinary config': process.env.CLOUDINARY_URL,
 	'cloudinary prefix': 'neurobits',
 	'cloudinary folders': true,
-	'cookie secret': process.env.COOKIE_SECRET || 'AxR|"V$P+GpgkR2;EfDG{.IBa{i*wA,#7V;m9>PTkR=!rV}ikTUB`"h<H/N1kq|A'
+	'cookie secret': process.env.COOKIE_SECRET || 'AxR|"V$P+GpgkR2;EfDG{.IBa{i*wA,#7V;m9>PTkR=!rV}ikTUB`"h<H/N1kq|A',
+
+	//for REST API
+	'cors allow origin'  : 'http://nicolascine.github.com',
+	'cors allow methods' : 'GET',
+	'cors allow headers' : 'Content-Type, Authorization'
 
 });
 
@@ -80,6 +85,7 @@ keystone.start();
 
 // inicializa rutas REST - previene error
 keystoneRest.registerRoutes(keystone.app);
+
 
 
 
