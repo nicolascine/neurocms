@@ -42,7 +42,7 @@ keystone.init({
 	'cookie secret': process.env.COOKIE_SECRET || 'AxR|"V$P+GpgkR2;EfDG{.IBa{i*wA,#7V;m9>PTkR=!rV}ikTUB`"h<H/N1kq|A',
 
 	//for REST API
-	'cors allow origin'  : 'http://nicolascine.github.com',
+	'cors allow origin'  : 'http://nicolascine.github.io',
 	'cors allow methods' : 'GET',
 	'cors allow headers' : 'Content-Type, Authorization'
 
