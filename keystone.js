@@ -52,7 +52,7 @@ keystone.import('models');
 
 keystone.set('locals', {
 	_: require('underscore'),
-	env: keystone('env'),
+	env: keystone.get('env'),
 	utils: keystone.utils,
 	editable: keystone.content.editable
 });
